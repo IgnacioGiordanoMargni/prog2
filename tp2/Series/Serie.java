@@ -96,17 +96,24 @@ public class Serie {
           episodio= this.temporadas[i].getEpisodios();
           vistos+=this.temporadas[i].cantEpVistos();
           suma+=sumaDeCalificaciones(episodio, i);
+         
           i++;
         }
-      
-        return suma/vistos;
+         if(suma>0){
+            return suma/vistos;
+         } else {
+            return 0;
+         }
+     
     }
     int sumaDeCalificaciones(Episodio[] episodio, int temporada){
         int j=0;
         int suma=0;
         while(j<this.temporadas[temporada].getCantEp()){
+            
             if(episodio[j].getFlag()){
                 suma+=episodio[j].getCalificacion();  
+              
             }
             j++;
           }
