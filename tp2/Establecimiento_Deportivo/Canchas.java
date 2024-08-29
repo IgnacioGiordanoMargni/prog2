@@ -16,9 +16,9 @@ private int precio;
 
 public Canchas(String tipo) {
     this.tipo = tipo;
-    if(this.tipo=="Futbol"){
+    if("Futbol".equals(this.tipo)){
         this.precio=400;
-    } else if(this.tipo=="Padel"){
+    } else if("Padel".equals(this.tipo)){
         this.precio=100;
     }
 

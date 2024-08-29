@@ -11,6 +11,7 @@ public class Establecimiento {
     private int cantT;
     private int cantC;
     private int cantU;
+    private int descuento;
     
 
     public Establecimiento(int cantT) {
@@ -18,6 +19,7 @@ public class Establecimiento {
         this.cantC=6;
         this.cantU=1;
         this.canchas= new Canchas[this.cantC];
+        this.descuento=10;
         int i=0;
         while(i<this.cantC){
             if(i<4){
@@ -58,7 +60,7 @@ public class Establecimiento {
       int i=0;
       boolean ocupada=false;
       LocalDateTime horario=turno.getHorario();
-    
+      
       while(i<this.cantT){
       
          if(horario.isAfter(this.turnos[i].getHorario()) && horario.isBefore(this.turnos[i].getHorario().plus(1, ChronoUnit.HOURS))){
@@ -68,16 +70,33 @@ public class Establecimiento {
       } 
       System.out.println(this.cantT);
       if(!ocupada){
-      
-        agrandarArregloTurnos();
-        this.turnos[this.cantT]=turno;
-        this.cantT++;
-       
-      } else {
+        if(esSocio(turno.getUsuario())){
+            agrandarArregloTurnos();
+            this.turnos[this.cantT]=turno; 
+            int precio= this.turnos[this.cantT].getCancha().getPrecio();
+            this.turnos[this.cantT].getCancha().setPrecio(precio-(precio*this.descuento)/100);
+             this.cantT++;
+        }  else {
+            agrandarArregloTurnos();
+            this.turnos[this.cantT]=turno;
+            this.cantT++;
+        }
+    
+    } else {
         System.out.println("cancha ocupada");
       }
    
       
+    }
+    private boolean esSocio(Usuarios usuario){
+        int i=0, cant=0;
+        while(i<this.cantT){
+            if((this.turnos[i].getHorario().isAfter(LocalDateTime.now().minus(4, ChronoUnit.MONTHS))) && usuario.getNombre()==this.turnos[i].getUsuario().getNombre()){
+                cant++;
+            }
+           
+        }
+        return cant>=1;
     }
     private void agrandarArregloTurnos() {
          Turno[] turno= new Turno[this.cantT];

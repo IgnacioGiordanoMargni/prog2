@@ -5,7 +5,7 @@ public class Episodio {
     private int calificacion;
 
    
-    Episodio(){
+     Episodio(){
         setTitulo(" ");
         setCalificaion(4);
         setDescripcion(" ");
@@ -17,6 +17,9 @@ public class Episodio {
      setCalificaion(calificacion);
      setFlag(flag);
      setDescripcion(descripcion);
+   }
+   public Episodio(String titulo){
+    this(titulo, "ejemplo", false, 0);
    }
 
  void setDescripcion(String descripcion2) {

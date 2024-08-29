@@ -18,7 +18,7 @@ public class Ejecutable {
         Turno turno2 = new Turno(LocalDateTime.now().plus(30, ChronoUnit.MINUTES ), usuario, canchas[0] );
         establecimiento.setNewTurno(turno2);
         Turno[] turnos2= establecimiento.getTurnos();
-        System.out.println(turnos2[2].getHorario());
+        System.out.println(turnos2[0].getHorario());
         
     }
 }
